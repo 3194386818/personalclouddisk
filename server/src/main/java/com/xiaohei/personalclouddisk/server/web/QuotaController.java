@@ -1,3 +1,6 @@
+/*
+* 容量数据
+* */
 package com.xiaohei.personalclouddisk.server.web;
 
 import com.xiaohei.personalclouddisk.server.pojo.Quota;
@@ -8,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class QuotaController {
-
-    @Autowired
     private QuotaService quotaService;
 
+    public QuotaController(QuotaService quotaService) {
+        this.quotaService = quotaService;
+    }
 
     @GetMapping("/quota")
     public Quota quota() {
