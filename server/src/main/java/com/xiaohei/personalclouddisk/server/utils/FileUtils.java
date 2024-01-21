@@ -4,6 +4,7 @@ import com.xiaohei.personalclouddisk.server.pojo.FilePojo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.http.MediaType;
+import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -83,12 +84,12 @@ public class FileUtils {
         if (Files.isDirectory(path)) {
             // 目录
             filePojo.setIsdir((byte) 1);
-            filePojo.setCategory(getCategory(path));
             filePojo.setDir_empty(isDirEmpty(path) ? 0 : 1);
         } else {
             // 文件
             filePojo.setIsdir((byte) 0);
             filePojo.setSize(Files.size(path));
+            filePojo.setCategory(getCategory(path));
             filePojo.setMd5(DigestUtils.md5Hex(new FileInputStream(path.toFile())).toUpperCase());
         }
 
@@ -121,9 +122,10 @@ public class FileUtils {
         String s = Files.probeContentType(path);
         if (s != null) {
             MediaType mediaType = MediaType.parseMediaType(s);
-            return map.get(mediaType.getType());
+            Integer id = map.get(mediaType.getType());
+            return id == null ? 4 : id;
         } else {
-            return null;
+            return 4;
         }
     }
 
