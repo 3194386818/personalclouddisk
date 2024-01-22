@@ -2,9 +2,8 @@ package com.xiaohei.personalclouddisk.server.utils;
 
 import com.xiaohei.personalclouddisk.server.pojo.FilePojo;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.ibatis.javassist.expr.NewArray;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
-import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
@@ -99,6 +99,7 @@ public class FileUtils {
 
     /**
      * 通过Path解析为指定的类别编号
+     *
      * @param path 文件类型的
      * @return 指定编号
      * @throws IOException
@@ -131,6 +132,7 @@ public class FileUtils {
 
     /**
      * 是否存在子目录
+     *
      * @param path 必须为目录类型
      * @return
      */
@@ -158,6 +160,45 @@ public class FileUtils {
         }
 
         return Boolean.FALSE;
+    }
+
+    /**
+     * 将服务器的真实路径隐藏，如果服务器的是以`\`问分隔符，就统一转化为`/`
+     *
+     * @param prefix 要隐藏的前缀
+     * @param path   服务器的真实路径
+     * @return 客户端看到的路径
+     */
+    public static String serverPathToClientPath(String prefix, Path path) {
+        if (StringUtils.isEmpty(prefix) || path == null || !Files.exists(path)) {
+            return null;
+        }
+
+        String absolutePath = path.toAbsolutePath().toString();
+        if (absolutePath.contains(prefix)) {
+            // 去除前缀
+            String vmPath = absolutePath.substring(prefix.length());
+            // 替换转义符
+            if (vmPath.contains("\\")) {
+                vmPath = vmPath.replace("\\", "/");
+            }
+            return vmPath;
+        }
+        return null;
+    }
+
+    /**
+     * 将客户端的相对路径转换成服务器的绝对路径，将文件分隔符转为服务器相对应的分隔符
+     * @param prefix 前缀路径
+     * @param path 客户端路径
+     * @return 绝对路径
+     */
+    public static String clientPathToServerPath(String prefix, String path) {
+        if (StringUtils.isEmpty(prefix) || StringUtils.isEmpty(path)) {
+            return null;
+        }
+
+        return Paths.get(prefix, path).toAbsolutePath().toString();
     }
 
 }

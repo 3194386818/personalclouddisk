@@ -31,15 +31,9 @@ public class Test1 {
     public void pathsTest() throws IOException {
 
         String p = "C:\\Users\\dell\\Downloads\\apowermirrorpro-setup-saaspro.exe";
-        Path path = Paths.get(p);
-
-        String s = Files.probeContentType(path);
-        if (s != null) {
-            MediaType mediaType = MediaType.parseMediaType(s);
-            System.out.println(mediaType);
-        } else {
-            System.out.println("null");
-        }
+        String a = "C:\\Users\\dell\\Downloads";
+        String b = "/aa/abs.png";
+        System.out.println(Paths.get(a, b).toAbsolutePath().toString());
 
     }
 

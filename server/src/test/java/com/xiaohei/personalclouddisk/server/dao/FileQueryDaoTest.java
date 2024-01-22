@@ -31,11 +31,13 @@ public class FileQueryDaoTest {
         Path path = Paths.get(config.queryValue(Config.DISK_PATH), "1.15.2");
 
         fileRequest.setDir(path.toAbsolutePath().toString());
+        fileRequest.setOrder(FileRequest.ORDER_TIME);
+        fileRequest.setDesc(1);
+        fileRequest.setLimit(20);
 
-        /**
-         * TODO: 有个异常(Throwable)，回来的时候处理
-         */
         List<FilePojo> filePojos = fileQueryDao.queryFile(fileRequest);
-        System.out.println();
+        System.out.println("\n\n");
+        filePojos.forEach(System.out::println);
+        System.out.println("\n\n");
     }
 }

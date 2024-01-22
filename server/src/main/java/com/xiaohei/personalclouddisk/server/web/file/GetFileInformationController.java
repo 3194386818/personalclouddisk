@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/file")
-public class GetFileInformation {
+public class GetFileInformationController {
 
 
     @GetMapping("/list")

@@ -3,13 +3,19 @@ package com.xiaohei.personalclouddisk.server.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.validation.constraints.Pattern;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Data
 public class FileRequest {
+    public static final String ORDER_NAME = "name";
+    public static final String ORDER_TIME = "time";
+    public static final String ORDER_SIZE = "size";
+
     // 需要查看文件的目录，默认为:/
     private String dir = "/";
     /*

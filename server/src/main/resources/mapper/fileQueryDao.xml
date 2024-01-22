@@ -8,14 +8,35 @@
         from files
         where path = #{path}
     </select>
-    <select id="queryFile" resultType="com.xiaohei.personalclouddisk.server.pojo.FilePojo">
+
+
+    <select id="queryFile" parameterType="com.xiaohei.personalclouddisk.server.pojo.FileRequest"
+            resultType="com.xiaohei.personalclouddisk.server.pojo.FilePojo">
         SELECT *
         FROM files
-        WHERE files.path LIKE '#{dir}%'
-          AND files.path NOT LIKE '#{dir}%\%'
-
+        WHERE files.path LIKE #{dir} || '\%'
+        AND files.path NOT LIKE #{dir} || '\%\%'
         ORDER BY files.isdir DESC,
-                 files.server_filename ASC
-        LIMIT 5 OFFSET 5
+        <choose>
+            <when test="order == 'name'">
+                files.server_filename
+            </when>
+            <when test="order == 'time'">
+                files.server_mtime
+            </when>
+            <when test="order == 'size'">
+                files.size
+            </when>
+        </choose>
+        <choose>
+            <when test="desc == 1">
+                DESC
+            </when>
+            <otherwise>
+                ASC
+            </otherwise>
+        </choose>
+
+        LIMIT #{limit} OFFSET #{start}
     </select>
 </mapper>
