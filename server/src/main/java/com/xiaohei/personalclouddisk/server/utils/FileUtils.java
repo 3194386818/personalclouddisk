@@ -1,5 +1,6 @@
 package com.xiaohei.personalclouddisk.server.utils;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.xiaohei.personalclouddisk.server.pojo.FilePojo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -199,6 +200,20 @@ public class FileUtils {
         }
 
         return Paths.get(prefix, path).toAbsolutePath().toString();
+    }
+
+    /**
+     * 判断路径是否存在
+     * @param prefix
+     * @param path
+     * @return
+     */
+    public static boolean isClientPathExists(String prefix, String path) {
+        String serverPath = clientPathToServerPath(prefix, path);
+        if (serverPath == null) {
+            return false;
+        }
+        return Files.exists(Paths.get(serverPath));
     }
 
 }
