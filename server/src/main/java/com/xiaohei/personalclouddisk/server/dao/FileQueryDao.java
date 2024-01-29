@@ -21,4 +21,11 @@ public interface FileQueryDao {
      * @return
      */
     List<FilePojo> queryFile(FileRequest fileRequest);
+
+    /**
+     * 通过文件id查询
+     * @param fs_id
+     * @return
+     */
+    FilePojo queryFileByFSID(String fs_id);
 }

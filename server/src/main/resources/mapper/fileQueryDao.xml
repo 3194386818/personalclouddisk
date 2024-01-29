@@ -9,7 +9,6 @@
         where path = #{path}
     </select>
 
-
     <select id="queryFile" parameterType="com.xiaohei.personalclouddisk.server.pojo.FileRequest"
             resultType="com.xiaohei.personalclouddisk.server.pojo.FilePojo">
         SELECT *
@@ -38,5 +37,9 @@
         </choose>
 
         LIMIT #{limit} OFFSET #{start}
+    </select>
+
+    <select id="queryFileByFSID" parameterType="string" resultType="com.xiaohei.personalclouddisk.server.pojo.FilePojo">
+        select * from files where `fs_id` = #{fs_id}
     </select>
 </mapper>

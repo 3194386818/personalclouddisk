@@ -57,4 +57,14 @@ public class ResultData<T> {
     public static final <T> ResultData fileNot(Map<String, T> data) {
         return new ResultData(-31066, "文件不存在", data);
     }
+
+    /**
+     * 测试使用
+     * @param data
+     * @param <T>
+     * @return
+     */
+    public static final <T> ResultData test(Map<String, T> data) {
+        return new ResultData(0, "测试", data);
+    }
 }
