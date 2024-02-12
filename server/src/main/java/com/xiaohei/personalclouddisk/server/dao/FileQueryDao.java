@@ -2,9 +2,13 @@ package com.xiaohei.personalclouddisk.server.dao;
 
 import com.xiaohei.personalclouddisk.server.pojo.FilePojo;
 import com.xiaohei.personalclouddisk.server.pojo.FileRequest;
+import com.xiaohei.personalclouddisk.server.pojo.SearchFilePojo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface FileQueryDao {
@@ -28,4 +32,18 @@ public interface FileQueryDao {
      * @return
      */
     FilePojo queryFileByFSID(String fs_id);
+
+    /**
+     * 通过 searchFilePOJO 查询指定的数据
+     * @param searchFilePojo
+     * @return
+     */
+    List<FilePojo> searchFileData(SearchFilePojo searchFilePojo);
+
+    /**
+     * 查询他的size
+     * @param searchFilePojo
+     * @return
+     */
+    Long searchFileCount(SearchFilePojo searchFilePojo);
 }

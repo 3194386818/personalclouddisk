@@ -9,9 +9,9 @@ import com.xiaohei.personalclouddisk.server.service.GetFileInformationService;
 import com.xiaohei.personalclouddisk.server.utils.FileUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +45,7 @@ public class GetFileInformationServiceImpl implements GetFileInformationService 
 
     @Override
     public List<FilePojo> searchFile(SearchFilePojo searchFile, boolean b) {
+        List<String> l = new ArrayList<>();
         return null;
     }
 }

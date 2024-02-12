@@ -3,7 +3,6 @@ package com.xiaohei.personalclouddisk.server.service;
 import com.xiaohei.personalclouddisk.server.pojo.FilePojo;
 import com.xiaohei.personalclouddisk.server.pojo.FileRequest;
 import com.xiaohei.personalclouddisk.server.pojo.SearchFilePojo;
-import org.springframework.ui.Model;
 
 import java.util.List;
 

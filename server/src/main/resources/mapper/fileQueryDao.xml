@@ -35,11 +35,35 @@
                 ASC
             </otherwise>
         </choose>
-
         LIMIT #{limit} OFFSET #{start}
     </select>
 
     <select id="queryFileByFSID" parameterType="string" resultType="com.xiaohei.personalclouddisk.server.pojo.FilePojo">
-        select * from files where `fs_id` = #{fs_id}
+        select *
+        from files
+        where `fs_id` = #{fs_id}
     </select>
+
+    <sql id="searchFileSameSql">
+        from files
+        where `path` like #{dir} || '\%'
+        <if test="recursion == 0">
+            and `path` not like #{dir} || '\%\%'
+        </if>
+        and `server_filename` like '%' || #{key} || '%'
+    </sql>
+    <select id="searchFileData" parameterType="com.xiaohei.personalclouddisk.server.pojo.SearchFilePojo"
+            resultType="com.xiaohei.personalclouddisk.server.pojo.FilePojo">
+        <bind name="_offset" value="(page - 1) * num"/>
+        select *
+        <include refid="searchFileSameSql"></include>
+        limit #{num} offset #{_offset};
+    </select>
+    <select id="searchFileCount" parameterType="com.xiaohei.personalclouddisk.server.pojo.SearchFilePojo"
+            resultType="long">
+        select count(*)
+        <include refid="searchFileSameSql"></include>
+    </select>
+
+
 </mapper>
