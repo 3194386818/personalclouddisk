@@ -14,9 +14,9 @@ public interface GetFileInformationService {
 
     /**
      * 搜索文件
-     * @param searchFile
-     * @param b 用来返回是否还有下一页，true表示有下一页
-     * @return
+     * @param searchFile 搜索的pojo
+     * @param b [0]用来返回是否还有下一页，true表示有下一页
+     * @return 返回查询到的数据
      */
-    List<FilePojo> searchFile(SearchFilePojo searchFile, boolean b);
+    List<FilePojo> searchFile(SearchFilePojo searchFile, boolean[] b);
 }

@@ -8,7 +8,6 @@ import com.xiaohei.personalclouddisk.server.pojo.SearchFilePojo;
 import com.xiaohei.personalclouddisk.server.service.GetFileInformationService;
 import com.xiaohei.personalclouddisk.server.utils.FileUtils;
 import com.xiaohei.personalclouddisk.server.utils.HashMapUtils;
-import kotlin.collections.builders.MapBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -74,9 +73,11 @@ public class GetFileInformationController {
      */
     @GetMapping("/search")
     public ResultData searchFile(@Validated SearchFilePojo searchFilePojo) {
-        boolean has_more = false;
+        boolean[] has_more = new boolean[1];
+        searchFilePojo.setDir(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), searchFilePojo.getDir()));
+
         List<FilePojo> filePojos = getFileInformationService.searchFile(searchFilePojo, has_more);
-        return ResultData.success(new HashMapUtils<String, Object>().put("has_more", has_more ? 1 : 0). put("data", filePojos).builder());
+        return ResultData.success(new HashMapUtils<String, Object>().put("has_more", has_more[0] ? 1 : 0). put("data", filePojos).builder());
     }
 
     @ExceptionHandler(BindException.class)

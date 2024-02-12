@@ -21,4 +21,5 @@ public class SearchFilePojo {
     private Integer num = 500;
     // 是否递归，1递归, 0不递归
     private Integer recursion = 1;
+
 }

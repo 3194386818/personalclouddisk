@@ -10,9 +10,11 @@ import com.xiaohei.personalclouddisk.server.utils.FileUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.annotation.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -21,6 +23,7 @@ public class GetFileInformationServiceImpl implements GetFileInformationService 
 
     private FileQueryDao fileQueryDao;
     private Config config;
+
 
     @Override
     public List<FilePojo> getFileList(FileRequest fileRequest) {
@@ -44,8 +47,17 @@ public class GetFileInformationServiceImpl implements GetFileInformationService 
     }
 
     @Override
-    public List<FilePojo> searchFile(SearchFilePojo searchFile, boolean b) {
-        List<String> l = new ArrayList<>();
-        return null;
+    public List<FilePojo> searchFile(SearchFilePojo searchFile, boolean[] b) {
+        // 获取有多少条匹配的元素
+        Long itemCount = fileQueryDao.searchFileCount(searchFile);
+        // 计算出全部页面
+        long allPageNum = (itemCount / searchFile.getNum()) + (itemCount % searchFile.getNum() == 0 ? 0 : 1);
+        // 是否有下一页
+        b[0] = allPageNum > searchFile.getPage();
+        // data
+        List<FilePojo> filePojos = fileQueryDao.searchFileData(searchFile);
+        filePojos.forEach(v -> v.setPath(FileUtils.serverPathToClientPath(config.queryValue(Config.DISK_PATH), Paths.get(v.getPath()))));
+        return filePojos;
     }
 }
+
