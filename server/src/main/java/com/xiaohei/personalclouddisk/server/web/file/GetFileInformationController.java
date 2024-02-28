@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.file.Paths;
 import java.util.*;
 
+
+/**
+ * 查询文件的接口
+ */
 @RestController
 @AllArgsConstructor
 @RequestMapping("/file")
@@ -42,7 +46,9 @@ public class GetFileInformationController {
             fileList = new ArrayList<>();
         }
         Map<String, Object> map = new HashMap<>();
-        map.put("thisPath", FileUtils.serverPathToClientPath(config.queryValue(Config.DISK_PATH), Paths.get(fileRequest.getDir())));
+        String thisPath = FileUtils.serverPathToClientPath(config.queryValue(Config.DISK_PATH), Paths.get(fileRequest.getDir()));
+
+        map.put("thisPath", thisPath.equals("") ? "/" : thisPath);
         map.put("data", fileList);
 
 

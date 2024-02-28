@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/server/DDL_data_source" dialect="SQLite" />
+  </component>
   <component name="SqlResolveMappings">
-    <file url="file://$PROJECT_DIR$/server/src/main/resources/mapper/config.xml" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;1e9ed1c5-b2db-4a7f-9608-0ab69b1ff084&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;name&quot;:{       &quot;@qname&quot;:&quot;main&quot;      }     }    }   }  } }}" />
-    <file url="PROJECT" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;1e9ed1c5-b2db-4a7f-9608-0ab69b1ff084&quot;    }   }  } }}" />
+    <file url="file://$PROJECT_DIR$/server/src/main/resources/mapper/config.xml" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;37655d21-5e93-441f-a173-45b42ec98bbc&quot;    }   }  } }}" />
+    <file url="PROJECT" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;37655d21-5e93-441f-a173-45b42ec98bbc&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;@negative&quot;:&quot;1&quot;     }    }   }  } }}" />
   </component>
 </project>

@@ -12,6 +12,3 @@ mybatis:
 
 personalclouddisk:
   init-check: false
-logging:
-  level:
-    com.xiaohei.personalclouddisk.server.dao: debug

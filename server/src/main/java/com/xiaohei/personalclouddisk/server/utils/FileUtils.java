@@ -216,4 +216,20 @@ public class FileUtils {
         return Files.exists(Paths.get(serverPath));
     }
 
+    /**
+     * 截取子路径
+     * @param path 绝对路径
+     * @param par 想要去除的父路径
+     * @return
+     */
+    public static String getSubPath(Path path, Path par) {
+        if (path == null && par == null) return null;
+
+        String pathS = path.toAbsolutePath().toString();
+        String parS = par.toAbsolutePath().toString();
+
+        int index = parS.length();
+        return pathS.substring(index);
+    }
+
 }

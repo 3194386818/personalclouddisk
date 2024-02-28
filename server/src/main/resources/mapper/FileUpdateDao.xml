@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaohei.personalclouddisk.server.dao.FileUpdateDao">
+    <update id="updateFileDataByPath">
+        update files set
+                         path=#{filePojo.path},
+                         server_filename=#{filePojo.server_filename},
+                         size=#{filePojo.size},
+                         server_mtime=#{filePojo.server_mtime},
+                         server_ctime=#{filePojo.server_ctime},
+                         local_mtime=#{filePojo.local_mtime},
+                         local_ctime=#{filePojo.local_ctime},
+                         isdir=#{filePojo.isdir},
+                         category=#{filePojo.category},
+                         md5=#{filePojo.md5},
+                         dir_empty=#{filePojo.dir_empty}
+        where path=#{p}
+    </update>
+</mapper>
