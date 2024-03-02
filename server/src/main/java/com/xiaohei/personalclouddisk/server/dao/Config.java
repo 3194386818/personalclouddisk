@@ -7,5 +7,4 @@ public interface Config {
     String DISK_PATH = "disk_path";
 
     String queryValue(String key);
-
 }

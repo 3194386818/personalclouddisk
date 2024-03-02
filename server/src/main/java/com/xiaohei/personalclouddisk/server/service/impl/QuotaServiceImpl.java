@@ -1,9 +1,8 @@
 package com.xiaohei.personalclouddisk.server.service.impl;
 
-import com.xiaohei.personalclouddisk.server.dao.Config;
 import com.xiaohei.personalclouddisk.server.pojo.Quota;
 import com.xiaohei.personalclouddisk.server.service.QuotaService;
-import lombok.NonNull;
+import com.xiaohei.personalclouddisk.server.utils.GetConfigValue;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +13,11 @@ import java.io.File;
 public class QuotaServiceImpl implements QuotaService {
 
     @Autowired
-    private Config config;
+    private GetConfigValue getConfigValue;
 
     @Override
     public Quota getData() {
-        String diskPath = config.queryValue(Config.DISK_PATH);
+        String diskPath = getConfigValue.getDisk_path();
         if (StringUtils.isEmpty(diskPath)) {
             return null;
         }

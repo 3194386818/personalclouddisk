@@ -6,6 +6,7 @@ import com.xiaohei.personalclouddisk.server.dao.Config;
 import com.xiaohei.personalclouddisk.server.pojo.ResultData;
 import com.xiaohei.personalclouddisk.server.service.AdminFileService;
 import com.xiaohei.personalclouddisk.server.utils.FileUtils;
+import com.xiaohei.personalclouddisk.server.utils.GetConfigValue;
 import com.xiaohei.personalclouddisk.server.utils.HashMapUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,11 +26,11 @@ import java.util.List;
 public class AdminFileController {
 
     private AdminFileService adminFileService;
-    private Config config;
+    private GetConfigValue getConfigValue;
 
-    public AdminFileController(AdminFileService adminFileService, Config config) {
+    public AdminFileController(AdminFileService adminFileService, GetConfigValue getConfigValue) {
         this.adminFileService = adminFileService;
-        this.config = config;
+        this.getConfigValue = getConfigValue;
     }
 
     @NoArgsConstructor
@@ -69,8 +70,8 @@ public class AdminFileController {
     private ResultData copy(List<T_Json_Item> t_json_itemList) {
         for(T_Json_Item t_json_item : t_json_itemList) {
             if (isPath(t_json_item) && !StringUtils.isEmpty(t_json_item.getDest())) {
-                t_json_item.setPath(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), t_json_item.getPath()));
-                t_json_item.setDest(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), t_json_item.getDest()));
+                t_json_item.setPath(FileUtils.clientPathToServerPath(getConfigValue.getDisk_path(), t_json_item.getPath()));
+                t_json_item.setDest(FileUtils.clientPathToServerPath(getConfigValue.getDisk_path(), t_json_item.getDest()));
                 adminFileService.copy(t_json_item.path, t_json_item.getDest());
             } else {
                 return ResultData.parameterError(new HashMapUtils<String, Object>().put("msg", "缺少`path`或`dest`属性:\n" + t_json_item).builder());
@@ -82,8 +83,8 @@ public class AdminFileController {
     private ResultData move(List<T_Json_Item> t_json_itemList){
         for (T_Json_Item t_json_item : t_json_itemList) {
             if (isPath(t_json_item) && !StringUtils.isEmpty(t_json_item.getDest())) {
-                t_json_item.setPath(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), t_json_item.getPath()));
-                t_json_item.setDest(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), t_json_item.getDest()));
+                t_json_item.setPath(FileUtils.clientPathToServerPath(getConfigValue.getDisk_path(), t_json_item.getPath()));
+                t_json_item.setDest(FileUtils.clientPathToServerPath(getConfigValue.getDisk_path(), t_json_item.getDest()));
                 try {
                     adminFileService.move(t_json_item.path, t_json_item.getDest());
                 } catch (IOException e) {
@@ -99,7 +100,7 @@ public class AdminFileController {
     private ResultData rename(List<T_Json_Item> t_json_itemList){
         for (T_Json_Item t_json_item : t_json_itemList) {
             if (isPath(t_json_item) && !StringUtils.isEmpty(t_json_item.getNewname())) {
-                t_json_item.setPath(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), t_json_item.getPath()));
+                t_json_item.setPath(FileUtils.clientPathToServerPath(getConfigValue.getDisk_path(), t_json_item.getPath()));
                 try {
                     adminFileService.rename(t_json_item.path, t_json_item.getNewname());
                 } catch (IOException e) {
@@ -115,7 +116,7 @@ public class AdminFileController {
     private ResultData delete(List<T_Json_Item> t_json_itemList){
         for (T_Json_Item t_json_item : t_json_itemList) {
             if (isPath(t_json_item)) {
-                t_json_item.setPath(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), t_json_item.getPath()));
+                t_json_item.setPath(FileUtils.clientPathToServerPath(getConfigValue.getDisk_path(), t_json_item.getPath()));
                 try {
                     adminFileService.delete(t_json_item.path);
                 } catch (IOException e) {

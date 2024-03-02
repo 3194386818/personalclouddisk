@@ -7,6 +7,7 @@ import com.xiaohei.personalclouddisk.server.pojo.ResultData;
 import com.xiaohei.personalclouddisk.server.pojo.SearchFilePojo;
 import com.xiaohei.personalclouddisk.server.service.GetFileInformationService;
 import com.xiaohei.personalclouddisk.server.utils.FileUtils;
+import com.xiaohei.personalclouddisk.server.utils.GetConfigValue;
 import com.xiaohei.personalclouddisk.server.utils.HashMapUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.BindException;
@@ -26,7 +27,7 @@ import java.util.*;
 @RequestMapping("/file")
 public class GetFileInformationController {
 
-    private Config config;
+    private GetConfigValue getConfigValue;
     private GetFileInformationService getFileInformationService;
 
     /**
@@ -37,7 +38,7 @@ public class GetFileInformationController {
      */
     @GetMapping("/list")
     public ResultData getFileList(FileRequest fileRequest) {
-        if (!FileUtils.isClientPathExists(config.queryValue(Config.DISK_PATH), fileRequest.getDir())) {
+        if (!FileUtils.isClientPathExists(getConfigValue.getDisk_path(), fileRequest.getDir())) {
             return ResultData.directoryNot(null);
         }
 
@@ -46,7 +47,7 @@ public class GetFileInformationController {
             fileList = new ArrayList<>();
         }
         Map<String, Object> map = new HashMap<>();
-        String thisPath = FileUtils.serverPathToClientPath(config.queryValue(Config.DISK_PATH), Paths.get(fileRequest.getDir()));
+        String thisPath = FileUtils.serverPathToClientPath(getConfigValue.getDisk_path(), Paths.get(fileRequest.getDir()));
 
         map.put("thisPath", thisPath.equals("") ? "/" : thisPath);
         map.put("data", fileList);
@@ -80,7 +81,7 @@ public class GetFileInformationController {
     @GetMapping("/search")
     public ResultData searchFile(@Validated SearchFilePojo searchFilePojo) {
         boolean[] has_more = new boolean[1];
-        searchFilePojo.setDir(FileUtils.clientPathToServerPath(config.queryValue(Config.DISK_PATH), searchFilePojo.getDir()));
+        searchFilePojo.setDir(FileUtils.clientPathToServerPath(getConfigValue.getDisk_path(), searchFilePojo.getDir()));
 
         List<FilePojo> filePojos = getFileInformationService.searchFile(searchFilePojo, has_more);
         return ResultData.success(new HashMapUtils<String, Object>().put("has_more", has_more[0] ? 1 : 0). put("data", filePojos).builder());
