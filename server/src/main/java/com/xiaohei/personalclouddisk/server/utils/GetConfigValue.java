@@ -16,4 +16,8 @@ public class GetConfigValue {
     public String getDisk_path() {
         return config.queryValue(Config.DISK_PATH);
     }
+
+    public String getTmp_path() {
+        return config.queryValue(Config.TMP_PATH);
+    }
 }

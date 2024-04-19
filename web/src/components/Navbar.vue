@@ -7,10 +7,13 @@
       <div class="collapse navbar-collapse justify-content-center">
         <ul class="navbar-nav">
           <li class="nav-item mx-3">
-            <router-link class="nav-link active" to="/">文件</router-link>
+            <router-link class="nav-link" to="/">文件</router-link>
           </li>
           <li class="nav-item mx-3">
             <router-link class="nav-link" to="/capacity">容量</router-link>
+          </li>
+          <li class="nav-item mx-3">
+            <router-link class="nav-link" to="/music">qq音乐解码</router-link>
           </li>
         </ul>
       </div>

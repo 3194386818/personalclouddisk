@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import Main from '@/components/Main.vue'
+import Main from '@/view/Main.vue'
 import Test from '@/components/Main2.vue'
 import Test1 from '@/test/Test1.vue'
 import MusicDecoder from '@/view/MusicDecoder.vue'
@@ -30,5 +30,6 @@ const routes = [
 
 export const router = createRouter({
     history: createWebHashHistory(),
-    routes: routes
+    routes: routes,
+    linkActiveClass: 'active'
 })

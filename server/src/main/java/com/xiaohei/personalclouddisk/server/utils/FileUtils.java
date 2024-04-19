@@ -1,7 +1,8 @@
 package com.xiaohei.personalclouddisk.server.utils;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.xiaohei.personalclouddisk.server.pojo.FilePojo;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
@@ -18,6 +19,8 @@ import java.util.*;
 
 // 关于文件相关的工具类
 public class FileUtils {
+
+    private FileUtils(){}
 
     /**
      * 获取指定目录下的全部(包括子目录)文件和目录
@@ -232,4 +235,21 @@ public class FileUtils {
         return pathS.substring(index);
     }
 
+
+    /**
+     * 对转换路径的封装, 在应用程序启动时就加载到Bean里面了
+     */
+    @AllArgsConstructor
+    @Setter
+    public static class PathConversion {
+        private String prefix;
+
+        public String serverPathToClientPath(Path path) {
+            return FileUtils.serverPathToClientPath(prefix, path);
+        }
+
+        public String clientPathToServerPath(String path) {
+            return FileUtils.clientPathToServerPath(prefix, path);
+        }
+    }
 }
