@@ -4,6 +4,7 @@ import Main from '@/view/Main.vue'
 import Test from '@/components/Main2.vue'
 import Test1 from '@/test/Test1.vue'
 import MusicDecoder from '@/view/MusicDecoder.vue'
+import Capacity from '@/view/Capacity.vue'
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
         path: '/music',
         name: 'music',
         component: MusicDecoder
+    },
+    {
+        path: '/capacity',
+        name: 'capacity',
+        component: Capacity
     }
 ]
 

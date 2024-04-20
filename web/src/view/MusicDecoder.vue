@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 import {fileConversion} from 'public/decoder'
-import {UploadFilled} from "@element-plus/icons-vue";
-
+import {UploadFilled} from "@element-plus/icons-vue"
+import {ElIcon, ElUpload, } from "element-plus";
 
 
 </script>

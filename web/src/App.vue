@@ -1,10 +1,10 @@
 <template>
-  <header>
-    <Navbar/>
-  </header>
-  <div class="container">
-    <router-view></router-view>
-  </div>
+  <Navbar/>
+  <el-container direction="vertical">
+    <el-main>
+<!--      <router-view></router-view>-->
+    </el-main>
+  </el-container>
 </template>
 
 <script setup lang="ts">

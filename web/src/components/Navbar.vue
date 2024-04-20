@@ -1,24 +1,24 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light nav-bg-zdy">
-    <div class="container">
-      <!--  首页    -->
-      <a class="navbar-brand" href="/">网盘</a>
-      <!--  导航栏的跳转   -->
-      <div class="collapse navbar-collapse justify-content-center">
-        <ul class="navbar-nav">
-          <li class="nav-item mx-3">
-            <router-link class="nav-link" to="/">文件</router-link>
-          </li>
-          <li class="nav-item mx-3">
-            <router-link class="nav-link" to="/capacity">容量</router-link>
-          </li>
-          <li class="nav-item mx-3">
-            <router-link class="nav-link" to="/music">qq音乐解码</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<!--  <nav class="navbar navbar-expand-md navbar-light nav-bg-zdy">-->
+<!--    <div class="container">-->
+<!--      &lt;!&ndash;  首页    &ndash;&gt;-->
+<!--      <a class="navbar-brand" href="/">网盘</a>-->
+<!--      &lt;!&ndash;  导航栏的跳转   &ndash;&gt;-->
+<!--      <div class="collapse navbar-collapse justify-content-center">-->
+<!--        <ul class="navbar-nav">-->
+<!--          <li class="nav-item mx-3">-->
+<!--            <router-link class="nav-link" to="/">文件</router-link>-->
+<!--          </li>-->
+<!--          <li class="nav-item mx-3">-->
+<!--            <router-link class="nav-link" to="/capacity">容量</router-link>-->
+<!--          </li>-->
+<!--          <li class="nav-item mx-3">-->
+<!--            <router-link class="nav-link" to="/music">qq音乐解码</router-link>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </nav>-->
 </template>
 
 <script setup lang="ts">
