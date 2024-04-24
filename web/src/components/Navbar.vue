@@ -1,57 +1,37 @@
 <template>
-<!--  <nav class="navbar navbar-expand-md navbar-light nav-bg-zdy">-->
-<!--    <div class="container">-->
-<!--      &lt;!&ndash;  首页    &ndash;&gt;-->
-<!--      <a class="navbar-brand" href="/">网盘</a>-->
-<!--      &lt;!&ndash;  导航栏的跳转   &ndash;&gt;-->
-<!--      <div class="collapse navbar-collapse justify-content-center">-->
-<!--        <ul class="navbar-nav">-->
-<!--          <li class="nav-item mx-3">-->
-<!--            <router-link class="nav-link" to="/">文件</router-link>-->
-<!--          </li>-->
-<!--          <li class="nav-item mx-3">-->
-<!--            <router-link class="nav-link" to="/capacity">容量</router-link>-->
-<!--          </li>-->
-<!--          <li class="nav-item mx-3">-->
-<!--            <router-link class="nav-link" to="/music">qq音乐解码</router-link>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </nav>-->
+    <el-row justify="center">
+      <el-col :span="12">
+        <el-menu
+            mode="horizontal"
+            class="menu"
+            :default-active="actionIndex"
+            :router="true">
+          <el-menu-item index="/">首页</el-menu-item>
+          <el-menu-item index="/capacity">容量</el-menu-item>
+          <el-menu-item index="/upload">上传</el-menu-item>
+          <el-menu-item index="/music">qq音乐解码</el-menu-item>
+        </el-menu>
+      </el-col>
+    </el-row>
 </template>
 
 <script setup lang="ts">
 import icon from '../../public/icon.svg'
+import {ref} from "vue";
+
+const actionIndex = ref("/")
 
 </script>
 
 <style scoped>
-.nav-bg-zdy {
-  background-color: #e3f2fd;
+.menu {
+  background-color: unset;
+  justify-content: center;
+}
+.menu li {
+  font-size: 1.1em;
+  padding: 0 1.4rem;
 }
 
-.nav-bg-zdy .navbar-brand {
-  letter-spacing: 0.5rem;
-  font-weight: bold;
-  color: #4F616D;
-}
-
-.navbar-nav > li > router-link {
-  font-weight: bold;
-  font-size: 1.2em;
-  letter-spacing: 0.6em;
-  border-bottom: 0.2em solid #e3f2fd;
-  user-select: none;
-  cursor: pointer;
-}
-
-.navbar-nav li .active {
-  border-bottom: 0.2em solid black;
-}
-
-.navbar-nav > li > router-link:hover {
-  border-bottom: 0.2em solid black;
-}
 
 </style>

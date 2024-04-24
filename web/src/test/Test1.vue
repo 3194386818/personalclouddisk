@@ -1,15 +1,17 @@
 <template>
-<p>主机地址: {{ host }}</p>
+
+  <div class="common-layout">
+    <el-container>
+      <el-header>Header</el-header>
+      <el-main>Main</el-main>
+    </el-container>
+  </div>
+
 
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-
-let host = import.meta.env.VITE_SERVER_HOST
-
-
-
+import '@/css/template.css'
 
 </script>
 
