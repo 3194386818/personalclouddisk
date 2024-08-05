@@ -12,7 +12,13 @@
     <div class="el-row test_interface" v-if="isShowTestInterface">
       <div class="el-col-12">
         <h3>测试界面</h3>
-        <span>加载进来的文件个数: {{ fileSize }}</span>
+        <p><span>加载进来的文件个数: {{ fileList?.length }}</span></p>
+        <button @click="handleFile">解析文件</button>
+        <button @click="showObject">输入obj</button>
+
+        <ul>
+          <li v-for="item in blobs">{{ item.md5 }}</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -23,12 +29,23 @@
 <script setup lang="ts">
 import {isShowTestInterface} from '../configuration'
 import {ref} from "vue";
-import Text from "@/test/Text.vue";
+import {handleBlog, getBlobs} from '../utils/file_utils'
 
 /**
  * 文件的数量，并非文件的大小
  */
-const fileSize = ref<number>(0)
+const fileList = ref<FileList|null>(null)
+
+const blobs = ref(getBlobs())
+
+function showObject() {
+  // blobs.value = getBlobs()
+}
+
+function handleFile() {
+  handleBlog(fileList.value[0])
+}
+
 
 /**
  * 是否高亮显示
@@ -49,13 +66,7 @@ function file_upload_click() {
  */
 function f_input() {
   const file: HTMLInputElement = document.querySelector('#f')
-  let fileList: FileList = file.files;
-  fileSize.value = fileList.length
-
-  if (fileList.length > 0) {
-    let fileListElement: File = fileList[0];
-    console.log(fileListElement.name)
-  }
+  fileList.value = file.files
 }
 
 /**
@@ -63,9 +74,9 @@ function f_input() {
  * @param e {DragEvent}
  */
 function drop(e: DragEvent) {
-  const files = e.dataTransfer.files;
-  fileSize.value = files.length
+  fileList.value = e.dataTransfer.files;
 }
+
 
 /**
  * 当文件拖进来显示高亮
