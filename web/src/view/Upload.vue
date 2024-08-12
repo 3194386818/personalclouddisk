@@ -14,11 +14,18 @@
         <h3>测试界面</h3>
         <p><span>加载进来的文件个数: {{ fileList?.length }}</span></p>
         <button @click="handleFile">解析文件</button>
-        <button @click="showObject">输入obj</button>
+        <button @click="showObject">显示obj数组</button>
+        <p>------------------------------------分隔线------------------------------------</p>
 
-        <ul>
-          <li v-for="item in blobs">{{ item.md5 }}</li>
-        </ul>
+        <el-table :data="testData" style="width: 100%">
+          <el-table-column type="selection" width="55" />
+          <el-table-column label="Id" >
+            <template #default="scope">{{ scope.row.id }}</template>
+          </el-table-column>
+          <el-table-column property="name" label="Name"  />
+          <el-table-column property="md5" label="Md5"  />
+        </el-table>
+
       </div>
     </div>
   </div>
@@ -28,18 +35,38 @@
 
 <script setup lang="ts">
 import {isShowTestInterface} from '../configuration'
-import {ref} from "vue";
-import {handleBlog, getBlobs} from '../utils/file_utils'
+import {nextTick, ref} from "vue";
+import {handleBlog, getBlobs, BlobObj} from '../utils/file_utils'
 
 /**
  * 文件的数量，并非文件的大小
  */
 const fileList = ref<FileList|null>(null)
 
+interface Test {
+  id: number,
+  name: string,
+  md5: string
+}
+
+const testData = ref<Test[]>([])
+
 const blobs = ref(getBlobs())
 
 function showObject() {
-  // blobs.value = getBlobs()
+  blobs.value = getBlobs()
+  console.log(blobs.value)
+  for (let i = 0; i < blobs.value.length; i++) {
+    const t: Test = {
+      id: blobs.value[i].index,
+      name: ""+blobs.value[i].index,
+      md5: blobs.value[i].md5
+    }
+    testData.value.push(t)
+
+    console.log(testData.value)
+  }
+  nextTick()
 }
 
 function handleFile() {

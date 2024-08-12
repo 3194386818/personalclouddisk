@@ -16,10 +16,13 @@
 </template>
 
 <script setup lang="ts">
-import icon from '../../public/icon.svg'
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
-const actionIndex = ref("/")
+const actionIndex = ref('/')
+
+
+
 
 </script>
 

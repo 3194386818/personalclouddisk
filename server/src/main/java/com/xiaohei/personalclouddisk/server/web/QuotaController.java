@@ -5,6 +5,7 @@ package com.xiaohei.personalclouddisk.server.web;
 
 import com.xiaohei.personalclouddisk.server.pojo.Quota;
 import com.xiaohei.personalclouddisk.server.service.QuotaService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ public class QuotaController {
     }
 
     @GetMapping("/quota")
+    @CrossOrigin(origins = "*")
     public Quota quota() {
         return quotaService.getData();
     }
